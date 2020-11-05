@@ -20,7 +20,7 @@
 <br>
 
 # About
-**imgcat** is a crossplatform util written Nim. You can see image in your terminal just by one command:
+**imgcat** is a crossplatform util written in Nim. You can see image in your terminal just by one command:
 ```bash
 $ imgcat -i:filename.png
 ```
