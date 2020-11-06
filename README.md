@@ -11,7 +11,7 @@
   <br/>
   <br/>
   </b>
-  <img src="https://img.shields.io/badge/license-MIT-green?style=flat-square">
+  <img src="https://img.shields.io/github/license/not-lum/imgcat?style=flat-square">
 
    <img src="https://img.shields.io/badge/version-0.1.0-green?style=flat-square">
 
@@ -20,7 +20,7 @@
 <br>
 
 # About
-**imgcat** is a crossplatform util written in Nim. You can see image in your terminal just by one command:
+**imgcat** is a crossplatform util written in Nim. You can print image in your terminal just by one command:
 ```bash
 $ imgcat -i:filename.png
 ```
