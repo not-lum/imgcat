@@ -1,5 +1,5 @@
 <p align="center">
-  <img width=105 height=105 src="logo/kitty.png">
+  <img width=105 height=105 src="https://raw.githubusercontent.com/not-lum/imgcat/master/logo/kitty.png">
 </p>
 
 <h2 align="center"><b>imgcat</b></h2>
@@ -96,11 +96,9 @@ Also, there two more ways to reset: **resetBack()** and **resetFore()**<br>
 As you might have guessed, the first one resets only background color and another resets only foreground.
 
 
-# Installing
+# Installing(requires @nim_lang to build)
 ```bash
-$ git clone https://github.com/not-lum/imgcat.git
-$ cd imgcat
-$ nimble install
+$ nimble install imgcat
 ```
 
 <p align="center">Icon made by <a href="http://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
