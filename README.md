@@ -96,7 +96,7 @@ Also, there two more ways to reset: **resetBack()** and **resetFore()**<br>
 As you might have guessed, the first one resets only background color and another resets only foreground.
 
 
-# Installing(requires @nim_lang to build)
+# Installing(requires @nim-lang to build)
 ```bash
 $ nimble install imgcat
 ```
