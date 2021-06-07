@@ -33,8 +33,8 @@ $ imgcat --help
 # Utils
 
 ## Images:
-**proc image\*(imagename: string; minify=2; symbol="█"): string** - returns a string that contains a picture<br><br>
-**proc imgcat\*(imagename: string; minify=2; symbol="█"): string** - prints a picture<br><br>
+**proc imgcatP(imagename: string; symbol="█"; width=0; height=0): string** - returns a string that contains a picture<br><br>
+**proc imgcat(imagename: string; symbol="█"; width=0; height=0)** - prints a picture<br><br>
 
 
 ## Colors:
