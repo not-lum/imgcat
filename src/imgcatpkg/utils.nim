@@ -1,6 +1,6 @@
-import flippy
+import imageman
+import terminal
 import strformat
-import os
 
 
 proc bold*(text: string): string =
@@ -103,38 +103,36 @@ proc `*`(str: string; times: int): string =
     result &= str
 
 
-proc termImage(img: Image; y: int; symbol: string): string =
-  var x = 0
-  var pix_pic: string
 
-  while x < img.width:
+proc imgcatP*(imagename: string; symbol="█";
+              width=0; height=0): string =
+  var img = loadImage[ColorRGBU](imagename)
+  var str_image: string
 
-    var color = img.getRgba(x, y)
-    var pix = symbol.rgb($color.r, $color.g, $color.b)
+  if width == 0 and height == 0:
+    let diff = max(img.width, img.height) - min(img.width, img.height)
+    let terminalMin = min(terminalHeight(), terminalWidth())
 
-    if x != img.width - 1:
-      pix_pic &= pix
+    if img.width > img.height:
+      img = img.resizedBicubic(terminalMin, terminalMin - diff)
     else:
-      pix_pic &= pix & "\n"
-    inc x
-  return pix_pic
+      img = img.resizedBicubic(terminalMin - diff, terminalMin)
 
+  elif width > 0 and height > 0:
+    img = img.resizedBicubic(width, height)
 
-proc image*(imagename: string; minify=2; symbol="█"): string =
-  var image = loadImage(imagename)
-  var full_image: string
-  image = image.minify(minify)
-  
-  for y in 0..<image.height:
-    full_image &= image.termImage(y, symbol=symbol*2)
+  for y in 0..<img.height:
+    for x in 0..<img.width:
+      let color = img[x, y]
+      let pix = symbol.rgb($color.r, $color.g, $color.b) * 2
 
-  return full_image & reset()
+      if x != img.width - 1:
+        str_image &= pix
+      else:
+        str_image &= pix & "\n"
 
+  return str_image & reset()
 
-proc imgcat*(imagename: string; minify=2; symbol="█") =
-  let path = splitFile(imagename)
-
-  if path.ext == ".png":
-    echo image(imagename=imagename, minify=minify, symbol=symbol)
-  else:
-    echo "Error: ".red.reset & "images only with png extension are available"
+proc imgcat*(imagename: string; symbol="█";
+            width=0; height=0) =
+  echo imgcatP(imagename, symbol, width, height)

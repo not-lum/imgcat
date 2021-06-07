@@ -13,7 +13,7 @@
   </b>
   <img src="https://img.shields.io/github/license/not-lum/imgcat?style=flat-square">
 
-   <img src="https://img.shields.io/badge/version-0.1.0-green?style=flat-square">
+   <img src="https://img.shields.io/badge/version-0.2.0-green?style=flat-square">
 
    <img src="https://img.shields.io/badge/made_with-nim-green?style=flat-square">
 </p>
@@ -22,18 +22,13 @@
 # About
 **imgcat** is a crossplatform util written in Nim. You can print image in your terminal just by one command:
 ```bash
-$ imgcat -i:filename.png
+$ imgcat <IMAGENAME>
 ```
-You often need to minify the picture. You can do this by the **-m**, **--minify** option(by default it's 2):<br>
-```bash
-$ imgcat -i:filename.png -m:int
-```
-For full help write:
+If you need any help write:
 ```
 $ imgcat --help
 ```
-> **Note:** if you are Windows user it is highly recommended to use Windows Terminal instead of usual cmd.exe<br>
-> **Second note:** only PNG pictures are supported at the moment 
+> **Note:** if you are a Windows user, use Windows Terminal instead of cmd.exe<br>
 
 # Utils
 
@@ -96,7 +91,8 @@ Also, there two more ways to reset: **resetBack()** and **resetFore()**<br>
 As you might have guessed, the first one resets only background color and another resets only foreground.
 
 
-# Installing(requires @nim-lang to build)
+# Installing
+Requires @nim-lang to build
 ```bash
 $ nimble install imgcat
 ```
