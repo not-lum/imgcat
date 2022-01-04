@@ -52,21 +52,21 @@ All supported colors:
 **purple**,
 **cyan**,
 **white**<br>
-You can also use any other color by the rgb procedure:
+Also, you can use any other color by the rgb procedure:
 ```nim
-echo "I am red".rgb(255, 0, 0)
+echo "I am red!".rgb(255, 0, 0)
 ```
-You can change background color by adding "back" at the start of the color:
+You can change the background color by adding "back" at the start of the color:
 ```nim
-echo "I am yellow".backYellow
+echo "My background is yellow!".backYellow
 ```
-Also, you can format text:
+You can format text:
 ```nim
 echo "underline".underline
 echo "italic".italic
 echo "bold".bold
 ```
-But this ansi codes automaticly resets. This is mean, that
+Also, these ansi codes automaticly reset. This means, that
 ```nim
 echo italicOn()
 echo "italic"
@@ -76,8 +76,8 @@ is equal to:
 ```nim
 echo "italic".italic
 ```
-Bold and underline work similary.
-Color ansi codes(like green, yellow or blue) don't automatickly resets. This is an example:
+Bold and underline procedures work similary.
+The "color ansi codes" (like green, yellow or blue) don't automaticly reset. This is an example:
 ```nim
 echo "red".red
 echo "I am red too!"
@@ -87,8 +87,8 @@ So, you need to reset it. You can do it by writing "reset" at the end:
 echo "red".red.reset
 echo "I am not red anymore..."
 ```
-Also, there two more ways to reset: **resetBack()** and **resetFore()**<br>
-As you might have guessed, the first one resets only background color and another resets only foreground.
+Also, there are two more ways to reset: **resetBack()** and **resetFore()**<br>
+As you might have guessed, the first one resets only the background color and the other resets only the foreground color.
 
 
 # Installing
