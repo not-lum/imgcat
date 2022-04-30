@@ -5,15 +5,12 @@
 <h2 align="center"><b>imgcat</b></h2>
 
 <p align="center">
-  <b>See images in your terminal.
-  <br>
-  Written in Nim
-  <br/>
+  <b>This utility prints pictures in your console
   <br/>
   </b>
   <img src="https://img.shields.io/github/license/not-lum/imgcat?style=flat-square">
 
-   <img src="https://img.shields.io/badge/version-0.2.0-green?style=flat-square">
+   <img src="https://img.shields.io/badge/version-1.0-green?style=flat-square">
 
    <img src="https://img.shields.io/badge/made_with-nim-green?style=flat-square">
 </p>
@@ -32,69 +29,20 @@ $ imgcat --help
 
 # Utils
 
-## Images:
-**proc imgcatP(imagename: string; symbol="█"; width=0; height=0): string** - returns a string that contains a picture<br><br>
-**proc imgcat(imagename: string; symbol="█"; width=0; height=0)** - prints a picture<br><br>
+You can also use imgcat as a Nim library:
+```nim
+import imgcat
 
+echo imgcat("imagename.png",
+            pattern="NIM",
+            width=100,
+            height=100,
+            black_and_white=false)
 
-## Colors:
-```nim
-import imgcatpkg/utils
-
-echo "Hello, World!".green
 ```
-All supported colors:
-**black**,
-**red**,
-**green**,
-**yellow**,
-**blue**,
-**purple**,
-**cyan**,
-**white**<br>
-Also, you can use any other color by the rgb procedure:
-```nim
-echo "I am red!".rgb(255, 0, 0)
-```
-You can change the background color by adding "back" at the start of the color:
-```nim
-echo "My background is yellow!".backYellow
-```
-You can format text:
-```nim
-echo "underline".underline
-echo "italic".italic
-echo "bold".bold
-```
-Also, these ansi codes automaticly reset. This means, that
-```nim
-echo italicOn()
-echo "italic"
-echo italicOff()
-```
-is equal to:
-```nim
-echo "italic".italic
-```
-Bold and underline procedures work similary.
-The "color ansi codes" (like green, yellow or blue) don't automaticly reset. This is an example:
-```nim
-echo "red".red
-echo "I am red too!"
-```
-So, you need to reset it. You can do it by writing "reset" at the end:
-```nim
-echo "red".red.reset
-echo "I am not red anymore..."
-```
-Also, there are two more ways to reset: **resetBack()** and **resetFore()**<br>
-As you might have guessed, the first one resets only the background color and the other resets only the foreground color.
-
-
-# Installing
-Requires @nim-lang to build
-```bash
-$ nimble install imgcat
-```
+# Gallery
+<img src="logo/kitty_printed.png">
+<img src="logo/kitty_printed_nim.png">
+<img src="logo/kitty_printed_bw.png">
 
 <p align="center">Icon made by <a href="http://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>

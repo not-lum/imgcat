@@ -1,33 +1,38 @@
 import imgcatpkg/utils
 import argparse
-import strutils
+import terminal
 
 
-const helpText = """imgcat is a utility that allows you to view pictures in your terminal.
+var parser = newParser:
+  help("This utility prints pictures in your console.")
 
-NOTE: If width=0 and height=0 then the width and height are set automatically,
-depending on the size of the terminal.""".bold
-
-var p = newParser:
-  help(helpText)
   arg("imagename")
-  option("-s", "--symbol", help="set a custom symbol", default=some("█"))
-  option("-w", "--width", help="", default=some("0"))
-  option("-h", "--height", help="", default=some("0"))
+
+  flag("-bw", "--black-and-white")
+  flag("-iw", "--ignore-warnings")
+
+  option("-p", "--pattern", default=some("█"))
+  option("-w", "--width",   default=some("0"))
+  option("-h", "--height",  default=some("0"))
 
   run:
     try:
-      imgcat(opts.imagename, opts.symbol,
-            parseInt(opts.width), parseInt(opts.height))
+      enableTrueColors()
+
+      if not isTrueColorSupported() and not opts.ignore_warnings:
+        echo "WARNING: your terminal emulator does not support true colors."
+        opts.black_and_white = true
+
+      echo imgcat(opts.imagename,
+                  opts.pattern,
+                  parseInt(opts.width),
+                  parseInt(opts.height),
+                  opts.black_and_white)
+
+      disableTrueColors()
     except ValueError:
-      echo "ValueError: width and height must be integers!"
+      echo "ValueError: width, height: int; black-and-white: bool"
     except IOError:
-      echo "IOError: Cannot open file"
-    except RangeDefect:
-      echo "RangeDefect: The picture is too big"
+      echo "IOError: cannot open file"
 
-
-try:
-  p.run()
-except UsageError as e:
-  echo getCurrentExceptionMsg()
+parser.run()

@@ -1,138 +1,60 @@
 import imageman
 import terminal
 import strformat
+import strutils
+import unicode
 
 
-proc bold*(text: string): string =
-  return &"\x1b[1m{text}\x1b[22m"
+proc rgb(text: string;
+         r, g, b: uint8;
+         black_and_white: bool): string =
 
-proc boldOn*(): string =
-  return "\x1b[1m"
+  if not black_and_white:
+    return &"\x1b[38;2;{r};{g};{b}m{text}"
+  else:
+    let brightness = float(r) * 0.2126 + float(g) * 0.7152 + float(b) * 0.0722
 
-proc boldOff*(): string =
-  return &"\x1b[22m"
-
-proc italic*(text: string): string =
-  return &"\x1b[3m{text}\x1b[23m"
-
-proc italicOn*(): string =
-  return "\x1b[3m"
-
-proc italicOff*(): string =
-  return &"\x1b[23m"
-
-
-proc underline*(text: string): string =
-  return &"\x1b[4m{text}\x1b[24m"
-
-proc underlineOn*(): string =
-  return "\x1b[4m"
-
-proc underlineOff*(): string =
-  return &"\x1b[24m"
-
-
-
-proc black*(text=""): string =
-  return &"\x1b[30m{text}"
-
-proc red*(text=""): string =
-  return &"\x1b[31m{text}"
-
-proc green*(text=""): string =
-  return &"\x1b[32m{text}"
-
-proc yellow*(text=""): string =
-  return &"\x1b[33m{text}"
-
-proc blue*(text=""): string =
-  return &"\x1b[34m{text}"
-
-proc purple*(text=""): string =
-  return &"\x1b[35m{text}"
-
-proc cyan*(text=""): string =
-  return &"\x1b[36m{text}"
-
-proc white*(text=""): string =
-  return &"\x1b[37m{text}"
-
-proc resetFore*(text=""): string =
-  return &"{text}\x1b[49m"
-
-
-
-
-proc backBlack*(text=""): string =
-  return &"\x1b[40m{text}"
-
-proc backRed*(text=""): string =
-  return &"\x1b[41m{text}"
-
-proc backGreen*(text=""): string =
-  return &"\x1b[42m{text}"
-
-proc backYellow*(text=""): string =
-  return &"\x1b[43m{text}"
-
-proc backBlue*(text=""): string =
-  return &"\x1b[44m{text}"
-
-proc backPurple*(text=""): string =
-  return &"\x1b[45m{text}"
-
-proc backCyan*(text=""): string =
-  return &"\x1b[46m{text}"
-
-proc backWhite*(text=""): string =
-  return &"\x1b[47m{text}"
-
-proc resetBack*(text=""): string =
-  return &"{text}\x1b[49m"
-
-proc reset*(text=""): string =
-  return &"{text}\x1b[0m" # resets background and foreground
-
-
-proc rgb*(text: string; r, g, b: string): string =
-  return &"\x1b[38;2;{r};{g};{b}m{text}" # Works on terminals with rgb-ansi support
-
-
-proc `*`(str: string; times: int): string =
-  for i in 1..times:
-    result &= str
-
-
-
-proc imgcatP*(imagename: string; symbol="█";
-              width=0; height=0): string =
-  var img = loadImage[ColorRGBU](imagename)
-  var str_image: string
-
-  if width == 0 and height == 0:
-    let diff = max(img.width, img.height) - min(img.width, img.height)
-    let terminalMin = min(terminalHeight(), terminalWidth())
-
-    if img.width > img.height:
-      img = img.resizedBicubic(terminalMin, terminalMin - diff)
+    if brightness < 128:
+      return &"\x1b[30m{text}"
     else:
-      img = img.resizedBicubic(terminalMin - diff, terminalMin)
+      return &"\x1b[37m{text}"
 
+
+proc imgcat*(imagename: string;
+             pattern="█";
+             width=0;
+             height=0;
+             black_and_white=false): string =
+
+  var img = loadImage[ColorRGBU](imagename)
+
+  let patternLen = pattern.runeLen
+
+  # Resizing the image to match the size of the console 
+  if width == 0 and height == 0:
+    let terminalMin = min(terminalHeight(), terminalWidth())
+    img = img.resizedBicubic(terminalMin, img.height * terminalMin div img.width)
   elif width > 0 and height > 0:
     img = img.resizedBicubic(width, height)
+
+  # Textualizing the image
+  var patternCounter = 0
 
   for y in 0..<img.height:
     for x in 0..<img.width:
       let color = img[x, y]
-      let pix = symbol.rgb($color.r, $color.g, $color.b) * 2
+      var pix: string
 
-      if x != img.width - 1:
-        str_image &= pix
+      if patternLen > 1:
+        pix = pattern[patternCounter mod patternLen] &
+              pattern[(patternCounter + 1) mod patternLen]
+      
+        patternCounter += 2
       else:
-        str_image &= pix & "\n"
+        pix = pattern.repeat(2)
 
-  return str_image & reset()
+      result &= pix.rgb(color.r, color.g, color.b, black_and_white)
 
-proc imgcat*(imagename: string; symbol="█";
-            width=0; height=0) =
-  echo imgcatP(imagename, symbol, width, height)
+    result &= "\n"
+
+  result & "\x1b[0m"
