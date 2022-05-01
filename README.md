@@ -16,16 +16,15 @@
 </p>
 <br>
 
-# About
-**imgcat** is a crossplatform util written in Nim. You can print image in your terminal just by one command:
+# Usage
+To print an image write:
 ```bash
 $ imgcat <IMAGENAME>
 ```
-If you need any help write:
+To get help write:
 ```
 $ imgcat --help
 ```
-> **Note:** if you are a Windows user, use Windows Terminal instead of cmd.exe<br>
 
 # Utils
 
@@ -41,8 +40,8 @@ echo imgcat("imagename.png",
 
 ```
 # Gallery
-<img src="logo/kitty_printed.png">
-<img src="logo/kitty_printed_nim.png">
-<img src="logo/kitty_printed_bw.png">
+<img src="logo/kitty_printed.png" width=70% height=70%>
+<img src="logo/kitty_printed_nim.png" width=70% height=70%>
+<img src="logo/kitty_printed_bw.png" width=70% height=70%>
 
 <p align="center">Icon made by <a href="http://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
