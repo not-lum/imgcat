@@ -22,7 +22,7 @@ To print an image write:
 $ imgcat <IMAGENAME>
 ```
 To get help write:
-```
+```bash
 $ imgcat --help
 ```
 
@@ -40,8 +40,8 @@ echo imgcat("imagename.png",
 
 ```
 # Gallery
-<img src="logo/kitty_printed.png" width=70% height=70%>
-<img src="logo/kitty_printed_nim.png" width=70% height=70%>
-<img src="logo/kitty_printed_bw.png" width=70% height=70%>
+<img src="https://raw.githubusercontent.com/not-lum/imgcat/master/logo/kitty_printed.png" width=70% height=70%>
+<img src="https://raw.githubusercontent.com/not-lum/imgcat/master/logo/kitty_printed_nim.png" width=70% height=70%>
+<img src="https://raw.githubusercontent.com/not-lum/imgcat/master/logo/kitty_printed_bw.png" width=70% height=70%>
 
 <p align="center">Icon made by <a href="http://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
