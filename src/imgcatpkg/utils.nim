@@ -4,7 +4,6 @@ import strformat
 import strutils
 import unicode
 
-
 proc rgb(text: string;
          r, g, b: uint8;
          black_and_white: bool): string =
@@ -24,9 +23,10 @@ proc imgcat*(imagename: string;
              pattern="█";
              width=0;
              height=0;
-             black_and_white=false): string =
+             black_and_white=false;
+             transparency=false): string =
 
-  var img = loadImage[ColorRGBU](imagename)
+  var img = loadImage[ColorRGBAU](imagename)
 
   let patternLen = pattern.runeLen
 
@@ -45,13 +45,16 @@ proc imgcat*(imagename: string;
       let color = img[x, y]
       var pix: string
 
-      if patternLen > 1:
-        pix = pattern[patternCounter mod patternLen] &
-              pattern[(patternCounter + 1) mod patternLen]
-      
-        patternCounter += 2
+      if transparency and color.a == 0:
+        pix = "  "
       else:
-        pix = pattern.repeat(2)
+        if patternLen > 1:
+          pix = pattern[patternCounter mod patternLen] &
+                pattern[(patternCounter + 1) mod patternLen]
+        
+          patternCounter += 2
+        else:
+          pix = pattern.repeat(2)
 
       result &= pix.rgb(color.r, color.g, color.b, black_and_white)
 

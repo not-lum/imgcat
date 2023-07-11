@@ -30,13 +30,14 @@ $ imgcat --help
 
 You can also use imgcat as a Nim library:
 ```nim
-import imgcat
+import imgcatpkg/utils
 
 echo imgcat("imagename.png",
             pattern="NIM",
             width=100,
             height=100,
-            black_and_white=false)
+            black_and_white=false,
+            transparency=false)
 
 ```
 # Gallery

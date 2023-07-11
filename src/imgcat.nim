@@ -2,14 +2,14 @@ import imgcatpkg/utils
 import argparse
 import terminal
 
-
 var parser = newParser:
   help("This utility prints pictures in your console.")
 
   arg("imagename")
 
-  flag("-bw", "--black-and-white")
-  flag("-iw", "--ignore-warnings")
+  flag("-bw", "--black-and-white", help="Black and white mode")
+  flag("-iw", "--ignore-warnings", help="Ignores true colors warning")
+  flag("-t",  "--transparency",    help="Replaces transparent pixels with spaces")
 
   option("-p", "--pattern", default=some("█"))
   option("-w", "--width",   default=some("0"))
@@ -27,7 +27,8 @@ var parser = newParser:
                   opts.pattern,
                   parseInt(opts.width),
                   parseInt(opts.height),
-                  opts.black_and_white)
+                  opts.black_and_white,
+                  opts.transparency)
 
       disableTrueColors()
     except ValueError:
