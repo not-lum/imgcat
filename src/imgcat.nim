@@ -11,9 +11,9 @@ var parser = newParser:
   flag("-iw", "--ignore-warnings", help="Ignores true colors warning")
   flag("-t",  "--transparency",    help="Replaces transparent pixels with spaces")
 
-  option("-p", "--pattern", default=some("█"))
-  option("-w", "--width",   default=some("0"))
-  option("-h", "--height",  default=some("0"))
+  option("-p", "--pattern", default=some("█"), help="May consist of several characters")
+  option("-w", "--width",   default=some("0"), help="0 - auto resizing, depending on your terminal size. -1 - original width")
+  option("-h", "--height",  default=some("0"), help="0 - auto resizing, depending on your terminal size. -1 - original height")
 
   run:
     try:
@@ -32,7 +32,7 @@ var parser = newParser:
 
       disableTrueColors()
     except ValueError:
-      echo "ValueError: width, height: int; black-and-white: bool"
+      echo "ValueError: width, height: int"
     except IOError:
       echo "IOError: cannot open file"
 

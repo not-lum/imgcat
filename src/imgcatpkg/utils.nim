@@ -30,12 +30,27 @@ proc imgcat*(imagename: string;
 
   let patternLen = pattern.runeLen
 
-  # Resizing the image to match the size of the console 
+  # Resizing the image to match the size of the console
+  let terminalMin = min(terminalHeight(), terminalWidth())
+  
   if width == 0 and height == 0:
-    let terminalMin = min(terminalHeight(), terminalWidth())
     img = img.resizedBicubic(terminalMin, img.height * terminalMin div img.width)
+  elif width > 0 and height == 0:
+    img = img.resizedBicubic(width, img.height * terminalMin div img.width)
+  elif width == 0 and height > 0:
+    img = img.resizedBicubic(terminalMin, height)
   elif width > 0 and height > 0:
     img = img.resizedBicubic(width, height)
+  elif width == -1 and height > 0:
+    img = img.resizedBicubic(img.width, height)
+  elif height == -1 and width > 0:
+    img = img.resizedBicubic(width, img.height)
+  elif width == -1 and height == 0:
+    img = img.resizedBicubic(img.width, img.height * terminalMin div img.width)
+  elif height == -1 and width == 0:
+    img = img.resizedBicubic(terminalMin, img.height)
+  elif width == -1 and height == -1:
+    img = img.resizedBicubic(img.width, img.height)
 
   # Textualizing the image
   var patternCounter = 0

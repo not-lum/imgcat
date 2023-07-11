@@ -10,7 +10,7 @@
   </b>
   <img src="https://img.shields.io/github/license/not-lum/imgcat?style=flat-square">
 
-   <img src="https://img.shields.io/badge/version-1.0-green?style=flat-square">
+   <img src="https://img.shields.io/badge/version-1.2-green?style=flat-square">
 
    <img src="https://img.shields.io/badge/made_with-nim-green?style=flat-square">
 </p>
