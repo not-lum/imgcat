@@ -16,6 +16,12 @@
 </p>
 <br>
 
+# Installation
+You can install it via nimble:
+```bash
+$ nimble install imgcat
+```
+
 # Usage
 To print an image write:
 ```bash
