@@ -61,7 +61,7 @@ proc imgcat*(imagename: string;
       var pix: string
 
       if transparency and color.a == 0:
-        pix = "  "
+        result &= "  "
       else:
         if patternLen > 1:
           pix = pattern[patternCounter mod patternLen] &
@@ -71,7 +71,7 @@ proc imgcat*(imagename: string;
         else:
           pix = pattern.repeat(2)
 
-      result &= pix.rgb(color.r, color.g, color.b, black_and_white)
+        result &= pix.rgb(color.r, color.g, color.b, black_and_white)
 
     result &= "\n"
 

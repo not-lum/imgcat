@@ -1,6 +1,6 @@
 # Package
 
-version       = "1.2"
+version       = "1.2.1"
 author        = "not-lum"
 description   = "This utility prints pictures in your console"
 license       = "MIT"
