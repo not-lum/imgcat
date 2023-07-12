@@ -23,12 +23,12 @@ var parser = newParser:
         echo "WARNING: your terminal emulator does not support true colors."
         opts.black_and_white = true
 
-      echo imgcat(opts.imagename,
+      echo $imgcat(opts.imagename,
                   opts.pattern,
                   parseInt(opts.width),
                   parseInt(opts.height),
                   opts.black_and_white,
-                  opts.transparency)
+                  opts.transparency) & ansiResetCode
 
       disableTrueColors()
     except ValueError:

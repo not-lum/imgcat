@@ -10,7 +10,7 @@
   </b>
   <img src="https://img.shields.io/github/license/not-lum/imgcat?style=flat-square">
 
-   <img src="https://img.shields.io/badge/version-1.2.1-green?style=flat-square">
+   <img src="https://img.shields.io/badge/version-1.3-green?style=flat-square">
 
    <img src="https://img.shields.io/badge/made_with-nim-green?style=flat-square">
 </p>
@@ -32,14 +32,55 @@ You can also use imgcat as a Nim library:
 ```nim
 import imgcatpkg/utils
 
-echo imgcat("imagename.png",
+echo $imgcat("imagename.png",
             pattern="NIM",
-            width=100,
-            height=100,
+            width=0,
+            height=0,
             black_and_white=false,
             transparency=false)
 
 ```
+Pixel type:
+```nim
+type
+  PixelKind* = enum
+    rgbPixel,
+    bwpixel,
+    transparentPixel,
+    newLine
+  Pixel* = object
+    case kind*: PixelKind
+      of rgbPixel:
+        r*: uint8
+        g*: uint8
+        b*: uint8
+        rgbPattern*: string
+      of bwPixel:
+        black*: bool
+        bwPattern*: string
+      of transparentPixel:
+        discard
+      of newLine:
+        discard
+```
+
+imgcat proc:
+```nim
+proc imgcat*(imagename: string;
+             pattern="█";
+             width=(-1);
+             height=(-1);
+             black_and_white=false;
+             transparency=false): seq[Pixel]
+```
+$ operators
+```nim
+proc `$`*(pixel: Pixel): string
+```
+```nim
+proc `$`*(pixels: seq[Pixel]): string
+```
+
 # Gallery
 <img src="https://raw.githubusercontent.com/not-lum/imgcat/master/logo/kitty_printed.png" width=70% height=70%>
 <img src="https://raw.githubusercontent.com/not-lum/imgcat/master/logo/kitty_printed_nim.png" width=70% height=70%>
